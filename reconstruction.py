@@ -50,6 +50,7 @@ parser.add_argument("--wandb" , action="store_true", help="use wandb")
 parser.add_argument("--tag", type=str, default=None, help="optional run name for wandb and output directory")
 parser.add_argument("--no_weight_decay" , action="store_true", help="weight decay")
 parser.add_argument("--max_e" , type=int, default=10, help="max epoch")
+parser.add_argument("--seed", type=int, default=None, help="random seed (None: not fixed)")
 parser.add_argument("--skew", action="store_true", help="skew")
 parser.add_argument("--mask", action="store_true", help="mask")
 parser.add_argument("--loss", type=str, default="MSE", choices=["MSE", "L1"], help="reconstruction loss type (MSE or L1)")
@@ -97,6 +98,12 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
+if args.seed is not None:
+    import random
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+    torch.manual_seed(args.seed)
+    torch.cuda.manual_seed_all(args.seed)
 if len(args.sprite_size) == 1:
     args.sprite_size = (args.sprite_size[0], args.sprite_size[0])
 elif len(args.sprite_size) == 2:
