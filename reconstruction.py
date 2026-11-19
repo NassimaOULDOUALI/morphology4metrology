@@ -730,7 +730,7 @@ for item_idx, item in enumerate(items):
     max_iterations = 1000
 
     # Create progress bar for all epochs
-    total_batches = len(train_loader) * (max_e - start_epoch + 1)
+    total_batches = len(train_loader) * (max_e - start_epoch)
     current_batch = 0
     
     # Create a single progress bar for all epochs
@@ -747,7 +747,7 @@ for item_idx, item in enumerate(items):
         os.remove(metrics_file)
         print(f"🗑️ Erased existing metrics file: {metrics_file}")
     
-    for e in range(start_epoch, max_e + 1):
+    for e in range(start_epoch, max_e):
         # Initialize epoch metrics
         epoch_loss = 0.0
         epoch_loss_reco = 0.0
