@@ -14,7 +14,10 @@ import datasets.transforms as T
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _CONFIG_DIR = _MODULE_DIR if "dataset" in _MODULE_DIR else os.path.join(_MODULE_DIR, ".")
-with open(os.path.join(_CONFIG_DIR, "config.json"), "r", encoding="utf-8") as f:
+_CONFIG_FILE = os.path.join(_CONFIG_DIR, "config.json")
+if not os.path.exists(_CONFIG_FILE):  # fall back on datasets/config.json (same "datasets_path" key)
+    _CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "datasets", "config.json")
+with open(_CONFIG_FILE, "r", encoding="utf-8") as f:
     datasets_path = json.load(f)["datasets_path"]
 
 _DISAMBIGUATION_TABLE = os.path.join(_MODULE_DIR, "disambiguation_table.csv")
