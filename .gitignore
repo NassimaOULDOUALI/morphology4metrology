@@ -28,7 +28,7 @@ model_unfrozen.pth
 figure_*/
 *.png
 *.pth
-logs_reconstruction/
+/logs_reconstruction
 
 ComingSoon-Regular.ttf
 *.jpg
